@@ -262,7 +262,7 @@ section.home .content .main-btn:hover {
 
 /* Featured section */
 section.featured h2 {
-    position: absolute;
+    position: relative;
     z-index: 5;
     top: 0;
     left: 0;
@@ -271,7 +271,7 @@ section.featured h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 25px;
+    padding: 100px 200px;
 }
 
 section.featured h2 .section-title {
@@ -291,7 +291,7 @@ section.featured img .products .product {
     justify-content: center;
     align-items: center;
     padding: 100px 200px;
-    background: url(src/background.jpg)no-repeat;
+    background-image: url(src/i7_bmw.jpg)no-repeat;
     background-position: center;
     background-size: cover;
 }
