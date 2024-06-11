@@ -30,7 +30,7 @@ section.Header div.container div.header-nav ul li a {
     text-decoration: none;
 }
 
-/section.Header div.container div.header-nav ul li img {
+section.Header div.container div.header-nav ul li img {
 margin-top: 50%;
 margin-bottom: 50%;
 }
