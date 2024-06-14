@@ -9,37 +9,38 @@
             var query = window.location.search.substring(1);
             if (query) {
                 try {
-                    // Attempt to parse query string as JSON
                     var parsedJson = JSON.parse(decodeURIComponent(query));
                     return parsedJson;
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
-                    return null;
+                    return { error: 'Invalid JSON data in URL' }; // Return an object with an error message
                 }
             }
-            return null;
+            return null; // Return null if no JSON data found
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             var data = getJsonFromUrl();
-            var error = data ? data.error : null;
 
-            if (error) {
-                document.getElementById('error').textContent = error;
-                document.getElementById('userData').style.display = 'none'; // Hide user data if error
+            if (data === null) {
+                // No JSON data found
+                document.getElementById('error').textContent = ''; // Clear any previous error message
+                document.getElementById('userData').style.display = 'none'; // Hide user data section
+                document.getElementById('signinPrompt').style.display = 'block'; // Show sign-in prompt
+            } else if (data.error) {
+                // Invalid JSON data found
+                document.getElementById('error').textContent = data.error;
+                document.getElementById('userData').style.display = 'none'; // Hide user data section
                 document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
-            } else if (data) {
+            } else {
+                // Valid JSON data found
+                document.getElementById('error').textContent = ''; // Clear any previous error message
                 document.getElementById('username').textContent = data.username || '';
                 document.getElementById('result').textContent = data.result || '';
                 document.getElementById('total_mark').textContent = data.total_mark || '';
                 document.getElementById('reason').textContent = data.reason || '';
-                document.getElementById('error').textContent = ''; // Clear any previous error message
                 document.getElementById('userData').style.display = 'block'; // Show user data section
                 document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
-            } else {
-                document.getElementById('error').textContent = 'Unknown error occurred';
-                document.getElementById('userData').style.display = 'none'; // Hide user data section
-                document.getElementById('signinPrompt').style.display = 'block'; // Show sign-in prompt
             }
         });
 
