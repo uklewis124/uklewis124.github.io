@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord OAuth Example</title>
-    <!-- Link to your CSS file (if any) -->
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Static Site</title>
+    <script>
+        // Function to parse JSON from URL query parameter
+        function getJsonFromUrl() {
+            var query = window.location.search.substring(1);
+            if (query) {
+                return JSON.parse(decodeURIComponent(query.split('=')[1]));
+            }
+            return null;
+        }
+
+        // Example usage: Fetch JSON data and display on the page
+        document.addEventListener('DOMContentLoaded', function() {
+            var data = getJsonFromUrl();
+            if (data) {
+                // Example: Display username, result, total mark, reason
+                document.getElementById('username').textContent = data.username;
+                document.getElementById('result').textContent = data.result;
+                document.getElementById('total_mark').textContent = data.total_mark;
+                document.getElementById('reason').textContent = data.reason;
+            }
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Your Application</h1>
-        <p>Login with Discord to view your results:</p>
-        <a href="https://afternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com/auth/discord">Login with Discord</a>
-    </header>
-
-    <main>
-        <!-- Main content area -->
-    </main>
-
-    <footer>
-        <p>Footer content</p>
-    </footer>
-
-    <!-- Optionally include JavaScript files here -->
+    <h1>User Data</h1>
+    <div>
+        <p>Username: <span id="username"></span></p>
+        <p>Result: <span id="result"></span></p>
+        <p>Total Mark: <span id="total_mark"></span></p>
+        <p>Reason: <span id="reason"></span></p>
+    </div>
 </body>
 </html>
