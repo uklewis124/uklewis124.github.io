@@ -15,14 +15,18 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             var data = getJsonFromUrl();
-            if (data) {
+            var error = decodeURIComponent(window.location.search.split('error=')[1]);
+            
+            if (error) {
+                document.getElementById('error').textContent = error;
+                document.getElementById('userData').style.display = 'none'; // Hide user data if error
+            } else if (data) {
                 document.getElementById('username').textContent = data.username;
                 document.getElementById('result').textContent = data.result;
                 document.getElementById('total_mark').textContent = data.total_mark;
                 document.getElementById('reason').textContent = data.reason;
             } else {
-                var error = decodeURIComponent(window.location.search.split('error=')[1]);
-                document.getElementById('error').textContent = error || 'Unknown error occurred';
+                document.getElementById('error').textContent = 'Unknown error occurred';
             }
         });
     </script>
@@ -35,6 +39,6 @@
         <p>Total Mark: <span id="total_mark"></span></p>
         <p>Reason: <span id="reason"></span></p>
     </div>
-    <div id="errorMsg"><p><span id="error"></span></p></div>
+    <div id="error"></div>
 </body>
 </html>
