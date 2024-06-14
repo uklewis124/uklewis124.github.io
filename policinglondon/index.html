@@ -20,15 +20,23 @@
             if (error) {
                 document.getElementById('error').textContent = error;
                 document.getElementById('userData').style.display = 'none'; // Hide user data if error
+                document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
             } else if (data) {
                 document.getElementById('username').textContent = data.username;
                 document.getElementById('result').textContent = data.result;
                 document.getElementById('total_mark').textContent = data.total_mark;
                 document.getElementById('reason').textContent = data.reason;
+                document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
             } else {
                 document.getElementById('error').textContent = 'Unknown error occurred';
+                document.getElementById('userData').style.display = 'none'; // Hide user data section
+                document.getElementById('signinPrompt').style.display = 'block'; // Display sign-in prompt
             }
         });
+
+        function redirectToOAuth() {
+            window.location.href = 'https://afternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com/auth/discord';
+        }
     </script>
 </head>
 <body>
@@ -40,5 +48,10 @@
         <p>Reason: <span id="reason"></span></p>
     </div>
     <div id="error"></div>
+    
+    <div id="signinPrompt" style="display: none;">
+        <p>You are not logged in.</p>
+        <button onclick="redirectToOAuth()">Sign in with Discord</button>
+    </div>
 </body>
 </html>
