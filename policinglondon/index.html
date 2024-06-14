@@ -9,7 +9,8 @@
             var query = window.location.search.substring(1);
             if (query) {
                 try {
-                    var parsedJson = JSON.parse(decodeURIComponent(query));
+                    var dataParam = decodeURIComponent(query.split('=')[1]);
+                    var parsedJson = JSON.parse(dataParam);
                     return parsedJson;
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
