@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Site</title>
+    <title>User Data</title>
     <script>
-        // Function to parse JSON from URL query parameter
         function getJsonFromUrl() {
             var query = window.location.search.substring(1);
             if (query) {
@@ -14,26 +13,28 @@
             return null;
         }
 
-        // Example usage: Fetch JSON data and display on the page
         document.addEventListener('DOMContentLoaded', function() {
             var data = getJsonFromUrl();
             if (data) {
-                // Example: Display username, result, total mark, reason
                 document.getElementById('username').textContent = data.username;
                 document.getElementById('result').textContent = data.result;
                 document.getElementById('total_mark').textContent = data.total_mark;
                 document.getElementById('reason').textContent = data.reason;
+            } else {
+                var error = decodeURIComponent(window.location.search.split('error=')[1]);
+                document.getElementById('error').textContent = error || 'Unknown error occurred';
             }
         });
     </script>
 </head>
 <body>
     <h1>User Data</h1>
-    <div>
+    <div id="userData">
         <p>Username: <span id="username"></span></p>
         <p>Result: <span id="result"></span></p>
         <p>Total Mark: <span id="total_mark"></span></p>
         <p>Reason: <span id="reason"></span></p>
     </div>
+    <div id="error"></div>
 </body>
 </html>
