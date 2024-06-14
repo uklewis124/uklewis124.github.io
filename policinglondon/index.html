@@ -8,7 +8,15 @@
         function getJsonFromUrl() {
             var query = window.location.search.substring(1);
             if (query) {
-                return JSON.parse(decodeURIComponent(query.split('=')[1]));
+                var dataParam = query.split('=')[1];
+                if (dataParam) {
+                    try {
+                        return JSON.parse(decodeURIComponent(dataParam));
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                        return null;
+                    }
+                }
             }
             return null;
         }
@@ -22,10 +30,10 @@
                 document.getElementById('userData').style.display = 'none'; // Hide user data if error
                 document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
             } else if (data) {
-                document.getElementById('username').textContent = data.username;
-                document.getElementById('result').textContent = data.result;
-                document.getElementById('total_mark').textContent = data.total_mark;
-                document.getElementById('reason').textContent = data.reason;
+                document.getElementById('username').textContent = data.username || '';
+                document.getElementById('result').textContent = data.result || '';
+                document.getElementById('total_mark').textContent = data.total_mark || '';
+                document.getElementById('reason').textContent = data.reason || '';
                 document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
             } else {
                 document.getElementById('error').textContent = 'Unknown error occurred';
