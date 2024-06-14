@@ -8,14 +8,13 @@
         function getJsonFromUrl() {
             var query = window.location.search.substring(1);
             if (query) {
-                var dataParam = query.split('=')[1];
-                if (dataParam) {
-                    try {
-                        return JSON.parse(decodeURIComponent(dataParam));
-                    } catch (error) {
-                        console.error('Error parsing JSON:', error);
-                        return null;
-                    }
+                try {
+                    // Attempt to parse query string as JSON
+                    var parsedJson = JSON.parse(decodeURIComponent(query));
+                    return parsedJson;
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                    return null;
                 }
             }
             return null;
@@ -23,8 +22,8 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             var data = getJsonFromUrl();
-            var error = decodeURIComponent(window.location.search.split('error=')[1]);
-            
+            var error = data ? data.error : null;
+
             if (error) {
                 document.getElementById('error').textContent = error;
                 document.getElementById('userData').style.display = 'none'; // Hide user data if error
@@ -34,11 +33,13 @@
                 document.getElementById('result').textContent = data.result || '';
                 document.getElementById('total_mark').textContent = data.total_mark || '';
                 document.getElementById('reason').textContent = data.reason || '';
+                document.getElementById('error').textContent = ''; // Clear any previous error message
+                document.getElementById('userData').style.display = 'block'; // Show user data section
                 document.getElementById('signinPrompt').style.display = 'none'; // Hide sign-in prompt
             } else {
                 document.getElementById('error').textContent = 'Unknown error occurred';
                 document.getElementById('userData').style.display = 'none'; // Hide user data section
-                document.getElementById('signinPrompt').style.display = 'block'; // Display sign-in prompt
+                document.getElementById('signinPrompt').style.display = 'block'; // Show sign-in prompt
             }
         });
 
@@ -49,7 +50,7 @@
 </head>
 <body>
     <h1>User Data</h1>
-    <div id="userData">
+    <div id="userData" style="display: none;">
         <p>Username: <span id="username"></span></p>
         <p>Result: <span id="result"></span></p>
         <p>Total Mark: <span id="total_mark"></span></p>
