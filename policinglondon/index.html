@@ -13,7 +13,7 @@
     <!-- JavaScript code will go here -->
     <script>
     // Initiate Discord OAuth flow
-    fetch('https://afternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com/auth/discord')
+    fetch('https://discord.com/oauth2/authorize?client_id=1251239179531190353&response_type=code&redirect_uri=https%3A%2F%2Fafternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com%2Fauth%2Fdiscord%2Fcallback&scope=identify')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
