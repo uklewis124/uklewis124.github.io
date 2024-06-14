@@ -3,47 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Results</title>
+    <title>Discord OAuth Example</title>
+    <!-- Link to your CSS file (if any) -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="result-container">
-        <!-- Result will be displayed here -->
-    </div>
+    <header>
+        <h1>Welcome to Your Application</h1>
+        <p>Login with Discord to view your results:</p>
+        <a href="https://afternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com/auth/discord">Login with Discord</a>
+    </header>
 
-    <!-- JavaScript code will go here -->
-    <script>
-    // Initiate Discord OAuth flow
-    fetch('https://discord.com/oauth2/authorize?client_id=1251239179531190353&response_type=code&redirect_uri=https%3A%2F%2Fafternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com%2Fauth%2Fdiscord%2Fcallback&scope=identify')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json(); // If response is JSON, handle it accordingly
-    })
-    .then(data => {
-        console.log(data); // Log the received JSON data for verification
-        // Assuming successful authentication and redirection, fetch result data
-        fetch('https://afternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com/result')
-            .then(response => response.json())
-            .then(resultData => {
-                console.log(resultData); // Log result data received
-                // Update HTML elements with the received data
-                document.getElementById('result-container').innerHTML = `
-                    <p>Hello ${resultData.username}, you ${resultData.result} with a total mark of ${resultData.total_mark}. Reason: ${resultData.reason}</p>
-                `;
-            })
-            .catch(error => {
-                console.error('Error fetching result data:', error);
-                // Update UI to show error message if necessary
-                document.getElementById('result-container').innerHTML = `<p>Error fetching result data</p>`;
-            });
-    })
-    .catch(error => {
-        console.error('Error initiating Discord OAuth:', error);
-        // Handle error in OAuth initiation, show message or retry
-    });
+    <main>
+        <!-- Main content area -->
+    </main>
 
-</script>
+    <footer>
+        <p>Footer content</p>
+    </footer>
 
+    <!-- Optionally include JavaScript files here -->
 </body>
 </html>
