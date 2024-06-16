@@ -6,43 +6,41 @@
     <title>User Data</title>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var error = decodeURIComponent(window.location.search.split('error=')[1]);
-    
+            var urlParams = new URLSearchParams(window.location.search);
+            var error = urlParams.get('error');
+            var dataParam = urlParams.get('data');
+
             if (error) {
                 document.getElementById('error').textContent = error;
                 document.getElementById('userData').style.display = 'none';
                 document.getElementById('signinPrompt').style.display = 'block';
-            } else {
-                var dataParam = window.location.search.substring(1).split('data=')[1];
-                if (dataParam) {
-                    try {
-                        var data = JSON.parse(decodeURIComponent(dataParam));
-                        document.getElementById('username').textContent = data.username || '';
-                        document.getElementById('result').textContent = data.result || '';
-                        document.getElementById('total_mark').textContent = data.total_mark || '';
-                        document.getElementById('reason').textContent = data.reason || '';
-                        document.getElementById('error').textContent = ''; // Clear any previous error message
-                        document.getElementById('userData').style.display = 'block';
-                        document.getElementById('signinPrompt').style.display = 'none';
-                    } catch (error) {
-                        console.error('Error parsing JSON:', error);
-                        document.getElementById('error').textContent = 'Invalid JSON data';
-                        document.getElementById('userData').style.display = 'none';
-                        document.getElementById('signinPrompt').style.display = 'none';
-                    }
-                } else {
-                    document.getElementById('error').textContent = 'Unknown error occurred';
+            } else if (dataParam) {
+                try {
+                    var data = JSON.parse(decodeURIComponent(dataParam));
+                    document.getElementById('username').textContent = data.username || '';
+                    document.getElementById('result').textContent = data.result || '';
+                    document.getElementById('total_mark').textContent = data.total_mark || '';
+                    document.getElementById('reason').textContent = data.reason || '';
+                    document.getElementById('error').textContent = ''; // Clear any previous error message
+                    document.getElementById('userData').style.display = 'block';
+                    document.getElementById('signinPrompt').style.display = 'none';
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                    document.getElementById('error').textContent = 'Invalid JSON data';
                     document.getElementById('userData').style.display = 'none';
                     document.getElementById('signinPrompt').style.display = 'none';
                 }
+            } else {
+                document.getElementById('error').textContent = 'Unknown error occurred';
+                document.getElementById('userData').style.display = 'none';
+                document.getElementById('signinPrompt').style.display = 'none';
             }
         });
-    
+
         function redirectToOAuth() {
             window.location.href = 'https://afternoon-anchorage-24876-7a0d5f5b0baf.herokuapp.com/auth/discord';
         }
     </script>
-    
 </head>
 <body>
     <h1>User Data</h1>
@@ -52,7 +50,7 @@
         <p>Total Mark: <span id="total_mark"></span></p>
         <p>Reason: <span id="reason"></span></p>
     </div>
-    <div id="error"></div>
+    <div id="error" style="color: red;"></div>
     
     <div id="signinPrompt" style="display: none;">
         <p>You are not logged in.</p>
