@@ -9,6 +9,12 @@ window.onload = function() {
     const menuFadeStep = 10;
     const menuFadeDuration = 1000;
 
+    // Removing ability to scroll
+    document.addEventListener('scroll', () => {
+        // Stopping users ability to scroll forever
+        window.scrollTo(0, 0);
+    });
+
     // Removing Loading Screen
 
     const loading = document.getElementById('loading');
@@ -87,12 +93,6 @@ window.onload = function() {
             }
         }
     });
-
-    document.addEventListener('scroll', (event) => {
-        // Stopping users ability to scroll forever
-        window.scrollTo(0,0);
-    })
-
 };
 
 let currentScroll = 0;
