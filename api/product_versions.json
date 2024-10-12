@@ -1,0 +1,47 @@
+{
+    "LastUpdate": "2024-10-10 T:18:33:00",
+    "Products": [
+        {
+            "ProductID": 1,
+            "LatestVersion": "1.0",
+            "Versions": [
+                {
+                    "Version": "1.0",
+                    "Details": {
+                        "Name": "Account Manager",
+                        "Description": "Account Manager is a simple application that allows you to manage your accounts.",
+                        "Author": "Lewis Davies",
+                        "MajorVersionSupported": false
+                    },
+                    "Patches": [
+                        {
+                            "PatchVersion": 1,
+                            "ChangeLog": [
+                                "Initial release"
+                            ],
+                            "Flags": {
+                                "IsBeta": false,
+                                "IsDev": false,
+                                "IsDeprecated": true
+                            },
+                            "Date": "2024-10-10 T:18:33:00"
+                        },
+                        {
+                            "PatchVersion": 2,
+                            "ChangeLog": [
+                                "Updated Readme's"
+                            ],
+                            "Flags": {
+                                "IsBeta": false,
+                                "IsDev": false,
+                                "IsDeprecated": false
+                            },
+                            "Date": "2024-10-11 T:10:00:00"
+                        }
+
+                    ]
+                }
+            ]
+        }
+    ]
+}
